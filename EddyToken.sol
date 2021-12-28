@@ -49,12 +49,12 @@ contract EddyToken is ERC20Interface{
     }
     
     
-    function transfer(address to, uint tokens) public override returns(bool success){
-        require(balances[msg.sender] >= tokens);
+    function transfer(address to, uint num_of_tokens) public override returns(bool success){
+        require(balances[msg.sender] >= num_of_tokens);
         
-        balances[to] += tokens;
-        balances[msg.sender] -= tokens;
-        emit Transfer(msg.sender, to, tokens);
+        balances[to] += num_of_tokens;
+        balances[msg.sender] -= num_of_tokens;
+        emit Transfer(msg.sender, to, num_of_tokens);
         
         return true;
     }
@@ -65,24 +65,24 @@ contract EddyToken is ERC20Interface{
     }
     
     
-    function approve(address spender, uint tokens) public override returns (bool success){
-        require(balances[msg.sender] >= tokens);
-        require(tokens > 0);
+    function approve(address spender, uint num_of_tokens) public override returns (bool success){
+        require(balances[msg.sender] >= num_of_tokens);
+        require(num_of_tokens > 0);
         
-        allowed[msg.sender][spender] = tokens;
+        allowed[msg.sender][spender] = num_of_tokens;
         
-        emit Approval(msg.sender, spender, tokens);
+        emit Approval(msg.sender, spender, num_of_tokens);
         return true;
     }
     
     
-    function transferFrom(address from, address to, uint tokens) public override returns (bool success){
-         require(allowed[from][to] >= tokens);
-         require(balances[from] >= tokens);
+    function transferFrom(address from, address to, uint num_of_tokens) public override returns (bool success){
+         require(allowed[from][to] >= num_of_tokens);
+         require(balances[from] >= num_of_tokens);
          
-         balances[from] -= tokens;
-         balances[to] += tokens;
-         allowed[from][to] -= tokens;
+         balances[from] -= num_of_tokens;
+         balances[to] += num_of_tokens;
+         allowed[from][to] -= num_of_tokens;
          
          return true;
      }
